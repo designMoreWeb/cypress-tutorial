@@ -14,5 +14,7 @@ describe("Form test", () => {
         cy.get("textarea")
             .type("Hello World")
             .should("have.value", "Hello World");
+        
+        cy.get("form").submit();
     });
 });//end test
