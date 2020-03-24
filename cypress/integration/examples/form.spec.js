@@ -14,7 +14,17 @@ describe("Form test", () => {
         cy.get("textarea")
             .type("Hello World")
             .should("have.value", "Hello World");
-        
+
+        //Stubbing: Cypress is intercepting AJAX requests
+        cy.server();
+        cy.route({
+            url: "/users/**",
+            method: "POST",
+            response: { status: "Form Is Saved!", code: 201 }
+        });
+
         cy.get("form").submit();
+
+        cy.contains("Form Is Saved!");
     });
 });//end test
